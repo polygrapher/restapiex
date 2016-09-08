@@ -1,27 +1,27 @@
 {
-  "name": "rest-api-ex",
-  "version": "0.0.1",
-  "description": "Simple rest API for training",
-  "scripts": {
-    "start": "nodemon ./bin/www"
-  },
-  "keywords": [
-    "rest",
-    "api",
-    "node",
-    "express",
-    "mongodb"
-  ],
-  "author": "Serhii Yehorov",
-  "license": "MIT",
-  "dependencies": {
-    "body-parser": "~1.15.1",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.2.0",
-    "ejs": "~2.4.1",
-    "express": "~4.13.4",
-    "morgan": "~1.7.0",
-    "mongoose": "^4.5.8",
-    "serve-favicon": "~2.3.0"
-  }
+	"name": "rest-api-ex",
+	"version": "0.0.1",
+	"description": "Simple rest API for training",
+	"scripts": {
+		"start": "nodemon ./bin/www"
+	},
+	"keywords": [
+		"rest",
+		"api",
+		"node",
+		"express",
+		"mongodb"
+	],
+	"author": "Serhii Yehorov",
+	"license": "MIT",
+	"dependencies": {
+		"body-parser": "~1.15.1",
+		"cookie-parser": "~1.4.3",
+		"debug": "~2.2.0",
+		"ejs": "~2.4.1",
+		"express": "~4.13.4",
+		"morgan": "~1.7.0",
+		"mongoose": "^4.5.8",
+		"serve-favicon": "~2.3.0"
+	}
 }

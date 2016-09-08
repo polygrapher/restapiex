@@ -2,27 +2,27 @@ let mongoose = require('mongoose');
 let Product = require('../models/Product');
 
 class ProductService {
-    constructor() {}
+	constructor() {}
 
-    getProducts() {
-        return Product.find().exec();
-    }
+	getProducts() {
+		return Product.find().exec();
+	}
 
-    getSingleProduct() {
+	getSingleProduct() {
 
-    }
+	}
 
-    create() {
+	create() {
 
-    }
+	}
 
-    update() {
+	update() {
 
-    }
+	}
 
-    delete() {
+	delete() {
 
-    }
+	}
 }
 
 module.exports = new ProductService();
