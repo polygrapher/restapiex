@@ -6,12 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-
 // connect to mongoDB
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/restapidb')
+mongoose.connect('mongodb://localhost/products')
 	.then(() =>  console.log('connection succesful'))
-.catch((err) => console.error(err));
+	.catch((err) => console.error(err));
 
 
 // bootstrap app
