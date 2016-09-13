@@ -8,12 +8,19 @@ class ProductService {
 		return Product.find().exec();
 	}
 
-	getSingleProduct() {
-
+	getSingleProduct(id) {
+		return Product.findById(id);
 	}
 
-	create() {
-
+	create(data) {
+		const product = new Product({
+			name: data.name,
+			category: data.category,
+			description: data.description,
+			created_at: new Date.now,
+			updated_at: null
+		})
+		return product.save();
 	}
 
 	update() {

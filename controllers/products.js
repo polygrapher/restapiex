@@ -27,13 +27,17 @@ class ProductsController {
 
 	get(req, res) {
 		let id = req.params.id,
-			product = ProductsService.getSingleProduct(id);
-
-		if (!product) {
-			res.json([]);
-		} else {
-			res.json(product);
-		}
+			product = ProductsService.getSingleProduct(id)
+				.then((product) => {
+					if (!product) {
+						res.json([]);
+					} else {
+						res.json(product);
+					}
+			})
+			.catch((err) => {
+				next(err);
+			});
 	}
 
 	put(req, res) {
@@ -41,7 +45,11 @@ class ProductsController {
 	}
 
 	post(req, res) {
-
+		ProductsService.create(req.body.product)
+			.then(res.status)
+			.catch((err) => {
+				next(err);
+			});
 	}
 }
 
