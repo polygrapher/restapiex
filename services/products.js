@@ -5,7 +5,7 @@ class ProductService {
 	constructor() {}
 
 	getProducts() {
-		return Product.find().exec();
+		return Product.find({}).exec();
 	}
 
 	getSingleProduct(id) {
@@ -13,22 +13,15 @@ class ProductService {
 	}
 
 	create(data) {
-		const product = new Product({
-			name: data.name,
-			category: data.category,
-			description: data.description,
-			created_at: new Date.now,
-			updated_at: null
-		})
-		return product.save();
+		return Product.create(data)
 	}
 
-	update() {
-
+	update(id, data) {
+		return Product.findByIdAndUpdate(id, data);
 	}
 
-	delete() {
-
+	delete(id) {
+		return Product.findByIdAndRemove(id);
 	}
 }
 

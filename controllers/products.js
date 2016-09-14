@@ -13,6 +13,7 @@ class ProductsController {
 		this.router.get('/:id', this.get.bind(this));
 		this.router.post('/', this.post.bind(this));
 		this.router.put('/:id', this.put.bind(this));
+		this.router.delete('/:id', this.delete.bind(this));
 	}
 
 	cget(req, res) {
@@ -40,13 +41,49 @@ class ProductsController {
 			});
 	}
 
-	put(req, res) {
-
+	post(req, res) {
+		let data = req.body;
+		ProductsService.create(data)
+			.then((product) => {
+				if (!product) {
+					res.send('product didn\'t create');
+				} else {
+					res.send('product created');
+					res.sendStatus(200);
+				}
+			})
+			.catch((err) => {
+				next(err);
+			});
 	}
 
-	post(req, res) {
-		ProductsService.create(req.body.product)
-			.then(res.status)
+	put(req, res) {
+		let id = req.params.id,
+			data = req.body;
+		data.updated_at = Date.now();
+		ProductsService.update(id, data)
+			.then((product) => {
+				if (!product) {
+					res.send('product didn\'t update');
+				} else {
+					res.send('product updated');
+				}
+			})
+			.catch((err) => {
+				next(err);
+			});
+	}
+
+	delete(req, res) {
+		let id = req.params.id;
+		ProductsService.delete(id)
+			.then((product) => {
+				if (!product) {
+					res.send('product didn\'t create');
+				} else {
+					res.sendStatus(204);
+				}
+			})
 			.catch((err) => {
 				next(err);
 			});

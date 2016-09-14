@@ -1,12 +1,12 @@
 var mongoose = require('mongoose');
 
 var ProductSchema = new mongoose.Schema({
-	name: String,
-	category: String,
+	name: { type: String, required: true },
+	category: { type: String, required: true },
 	description: Array,
-	src: String,
 	type: String,
 	top: Boolean,
+	src: String,
 	price: String,
 	link: String,
 	created_at: { type: Date, default: Date.now },
