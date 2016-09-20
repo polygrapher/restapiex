@@ -13,6 +13,15 @@ mongoose.connect('mongodb://localhost/restapidb')
   .then(() =>  console.log('connection succesful'))
 .catch((err) => console.error(err));
 
+// Duplicate the ID field.
+// mongoose.Schema.virtual('id').get(function(){
+//   return this._id.toHexString();
+// });
+//
+// // Ensure virtual fields are serialised.
+// mongoose.Schema.set('toJSON', {
+//   virtuals: true
+// });
 
 // bootstrap app
 var app = express();
@@ -20,6 +29,13 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// enabling CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
