@@ -27,15 +27,14 @@ class ProductsController {
 	}
 
 	get(req, res) {
-		// TODO why do you need to declare product variable here?
-		let id = req.params.id,
-			product = ProductsService.getSingleProduct(id)
-				.then((product) => {
-					if (!product) {
-						res.json([]);
-					} else {
-						res.json(product);
-					}
+		let id = req.params.id;
+		ProductsService.getSingleProduct(id)
+			.then((product) => {
+				if (!product) {
+					res.json([]);
+				} else {
+					res.json(product);
+				}
 			})
 			.catch((err) => {
 				next(err);
