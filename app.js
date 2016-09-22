@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 
 // connect to mongoDB
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/products')
+mongoose.connect('mongodb://localhost/react-proj-db')
 	.then(() =>  console.log('connection succesful'))
 	.catch((err) => console.error(err));
 
@@ -56,6 +56,12 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
 	app.use(function(err, req, res, next) {
 		res.status(err.status || 500);
+		res.json({
+			status : "error",
+			message: err.message,
+			code: err.status,
+			data: err.stack
+		});
 		res.render('error', {
 			message: err.message,
 			error: err
@@ -68,6 +74,12 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
 	res.status(err.status || 500);
+	res.json({
+		status : "error",
+		message: err.message,
+		code: err.status,
+		data: err.stack
+	});
 	res.render('error', {
 		message: err.message,
 		error: {}

@@ -16,76 +16,107 @@ class ProductsController {
 		this.router.delete('/:id', this.delete.bind(this));
 	}
 
+response(data) {
+	return {
+		success: {
+			status: "success",
+			data: {data}
+		},
+		fail: {
+			status: "fail",
+			data: data
+		},
+		error: {
+			status: "error",
+			message: data.message,
+			code: data.status,
+			data: data.stack
+		}
+	}
+}
+
 	cget(req, res) {
 		ProductsService.getProducts()
-			.then((products) => {
-				res.json(products);
+			.then(data => {
+				if (data) {
+					res.json(this.response(data).success);
+				} else {
+					res.status(404);
+					res.json(this.response(data).fail);
+				}
 			})
-			.catch((err) => {
-				next(err);
+			.catch(err => {
+				res.status(err.status || 400);
+				res.json(this.response(err).fail);
 			});
 	}
 
 	get(req, res) {
 		let id = req.params.id;
 		ProductsService.getSingleProduct(id)
-			.then((product) => {
-				if (!product) {
-					res.json([]);
+			.then(data => {
+				if (data) {
+					res.json(this.response(data).success);
 				} else {
-					res.json(product);
+					res.status(404);
+					res.json(this.response(data).fail);
 				}
 			})
-			.catch((err) => {
-				next(err);
+			.catch(err => {
+				res.status(err.status || 400);
+				res.json(this.response(err).error);
 			});
 	}
 
 	post(req, res) {
 		let data = req.body;
 		ProductsService.create(data)
-			.then((product) => {
-				if (!product) {
-					res.send('product didn\'t create');
+			.then(data => {
+				if (data) {
+					res.json(this.response(data).success);
 				} else {
-					res.send('product created');
-					res.sendStatus(200);
+					res.status(501);
+					res.json(this.response(data).fail);
 				}
 			})
-			.catch((err) => {
-				next(err);
+			.catch(err => {
+				res.status(err.status || 422);
+				res.json(this.response(err).error);
 			});
 	}
 
 	put(req, res) {
-		let id = req.params.id,
-			data = req.body;
+		let id = req.params.id, data = req.body;
 		data.updated_at = Date.now();
 		ProductsService.update(id, data)
-			.then((product) => {
-				if (!product) {
-					res.send('product didn\'t update');
+			.then(data => {
+				if (data) {
+					res.json(this.response(data).success)
 				} else {
-					res.send('product updated');
+					res.status(501);
+					res.json(this.response(data).fail);
 				}
 			})
-			.catch((err) => {
-				next(err);
+			.catch(err => {
+				res.status(err.status || 500);
+				res.json(this.response(err).error);
 			});
 	}
 
 	delete(req, res) {
 		let id = req.params.id;
 		ProductsService.delete(id)
-			.then((product) => {
-				if (!product) {
-					res.send('product didn\'t create');
+			.then(data => {
+				if (data) {
+					res.json(this.response(data).success);
 				} else {
-					res.sendStatus(204);
+					res.status(404);
+					res.json(this.response(data).fail);
 				}
 			})
-			.catch((err) => {
-				next(err);
+			.catch(err => {
+				res.status(err.status || 400);
+				res.json(this.response(err).error);
 			});
 	}
 }
