@@ -4,7 +4,7 @@ var ProductSchema = new mongoose.Schema({
 	name: { type: String, required: true },
 	category: { type: String, required: true },
 	description: Array,
-	type: String,
+	type: { type: String, default: "advert" },
 	top: Boolean,
 	src: String,
 	price: String,
