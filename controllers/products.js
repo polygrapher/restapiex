@@ -30,7 +30,7 @@ response(data) {
 			status: "error",
 			message: data.message,
 			code: data.status,
-			data: data.stack
+			data: data.errors
 		}
 	}
 }
@@ -38,12 +38,7 @@ response(data) {
 	cget(req, res) {
 		ProductsService.getProducts()
 			.then(data => {
-				if (data) {
-					res.json(this.response(data).success);
-				} else {
-					res.status(404);
-					res.json(this.response(data).fail);
-				}
+				res.json(this.response(data).success);
 			})
 			.catch(err => {
 				res.status(err.status || 400);
@@ -55,12 +50,7 @@ response(data) {
 		let id = req.params.id;
 		ProductsService.getSingleProduct(id)
 			.then(data => {
-				if (data) {
-					res.json(this.response(data).success);
-				} else {
-					res.status(404);
-					res.json(this.response(data).fail);
-				}
+				res.json(this.response(data).success);
 			})
 			.catch(err => {
 				res.status(err.status || 400);
@@ -72,12 +62,7 @@ response(data) {
 		let data = req.body;
 		ProductsService.create(data)
 			.then(data => {
-				if (data) {
-					res.json(this.response(data).success);
-				} else {
-					res.status(501);
-					res.json(this.response(data).fail);
-				}
+				res.json(this.response(data).success);
 			})
 			.catch(err => {
 				res.status(err.status || 422);
@@ -90,12 +75,7 @@ response(data) {
 		data.updated_at = Date.now();
 		ProductsService.update(id, data)
 			.then(data => {
-				if (data) {
-					res.json(this.response(data).success)
-				} else {
-					res.status(501);
-					res.json(this.response(data).fail);
-				}
+				res.json(this.response(data).success)
 			})
 			.catch(err => {
 				res.status(err.status || 500);
@@ -107,12 +87,7 @@ response(data) {
 		let id = req.params.id;
 		ProductsService.delete(id)
 			.then(data => {
-				if (data) {
-					res.json(this.response(data).success);
-				} else {
-					res.status(404);
-					res.json(this.response(data).fail);
-				}
+				res.json(this.response(data).success);
 			})
 			.catch(err => {
 				res.status(err.status || 400);

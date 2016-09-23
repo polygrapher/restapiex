@@ -1,27 +1,27 @@
 let mongoose = require('mongoose');
-let Product = require('../models/Product');
+let Advert = require('../models/Advert');
 
 class ProductService {
 	constructor() {}
 
 	getProducts() {
-		return Product.find({}).exec();
+		return Advert.find({}).exec();
 	}
 
 	getSingleProduct(id) {
-		return Product.findById(id);
+		return Advert.findById(id);
 	}
 
 	create(data) {
-		return Product.create(data)
+		return Advert.create(data)
 	}
 
 	update(id, data) {
-		return Product.findByIdAndUpdate(id, data);
+		return Advert.findByIdAndUpdate(id, data);
 	}
 
 	delete(id) {
-		return Product.findByIdAndRemove(id);
+		return Advert.findByIdAndRemove(id);
 	}
 }
 
