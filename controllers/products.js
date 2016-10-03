@@ -29,7 +29,7 @@ response(data) {
 		error: {
 			status: "error",
 			message: data.message,
-			code: data.status,
+			code: data.code,
 			data: data.errors
 		}
 	}
@@ -62,6 +62,7 @@ response(data) {
 		let data = req.body;
 		ProductsService.create(data)
 			.then(data => {
+				res.status(201);
 				res.json(this.response(data).success);
 			})
 			.catch(err => {
