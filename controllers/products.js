@@ -20,11 +20,11 @@ response(data) {
 	return {
 		success: {
 			status: "success",
-			data: {data}
+			data
 		},
 		fail: {
 			status: "fail",
-			data: {data}
+			data
 		},
 		error: {
 			status: "error",
