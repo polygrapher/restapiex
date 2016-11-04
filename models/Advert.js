@@ -1,12 +1,21 @@
 var mongoose = require('mongoose');
 
 var AdvertSchema = new mongoose.Schema({
-	name: {
+	title: {
 		type: String,
 		required: true,
 		maxlength: 100
 	},
+	slug: {
+		type: String,
+		required: true,
+		maxlength: 120
+	},
 	category: {
+		type: String,
+		required: true
+	},
+	subcategory: {
 		type: String,
 		required: true
 	},
@@ -18,10 +27,6 @@ var AdvertSchema = new mongoose.Schema({
 	type: {
 		type: String,
 		default: "advert"
-	},
-	top: {
-		type: Boolean,
-		default: false
 	},
 	images: Array,
 	price: String,

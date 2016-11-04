@@ -3,6 +3,7 @@ var express = require('express');
 
 // controllers
 var ProductsController = require('../controllers/products');
+var CategoriesController = require('../controllers/categories');
 
 module.exports = {
 	setup: function(app) {
@@ -17,5 +18,9 @@ module.exports = {
 	var productsApiV1 = express.Router();
 	apiV1.use('/products', productsApiV1);
 	var pc = new ProductsController(productsApiV1);
+
+	var categoriesApiV1 = express.Router();
+	apiV1.use('/categories', categoriesApiV1);
+	var cc = new CategoriesController(categoriesApiV1);
 	}
 };
